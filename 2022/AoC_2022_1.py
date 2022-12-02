@@ -18,3 +18,6 @@ for item in elves:
     totals.append(total)
 totals.sort()
 print(totals[-1])
+#Part 2 answer
+topThree = sum(totals[-3:])
+print(topThree)
