@@ -36,7 +36,6 @@ def seek(col, row, number, partChars, schematic):
 
 if __name__ == "__main__":
     partChars = ('+', '-', '*', '@', '=', '$', '%', '&', '#')
-    criteria = ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0')
     partNos = []
     with open ('AoC_2023_3.txt', 'r') as f:
         schematic = f.read()
@@ -46,12 +45,11 @@ if __name__ == "__main__":
     buffer = []
     while col <= 139:
         cursor = schematic[col][row]
-        if cursor in criteria:
+        if str.isdigit(cursor):
             buffer.append(cursor)
         else:
             if len(buffer) > 0:
                 number = ''.join(buffer)
-                print(number)
                 part = seek(col, row, number, partChars, schematic)
                 if part == True:
                     partNos.append(number)
@@ -61,5 +59,4 @@ if __name__ == "__main__":
             col += 1
             row = 0
     partNos = [int(i) for i in partNos]
-    #print(partNos)
     print(sum(partNos))
