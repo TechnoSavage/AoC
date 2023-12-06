@@ -37,11 +37,10 @@ def main():
         targets = []
         while x <= xLimit:
             if x == xLimit:
-                if len(targets) > 0:
-                    test = partScan(targets, schematic)
-                    if test:
-                        partNums.append(buildNum(targets, schematic))
-                    targets = []
+                test = partScan(targets, schematic)
+                if test:
+                    partNums.append(buildNum(targets, schematic))
+                targets = []
             elif str.isdigit(schematic.iloc[y, x]):
                 targets.append((y, x))
             else:
