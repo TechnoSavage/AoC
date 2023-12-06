@@ -29,21 +29,21 @@ def main():
         draft = f.read()
     blueprint = [list(line) for line in draft.split('\n')]
     schematic = pd.DataFrame(blueprint)
-    print(schematic)
     yLimit = schematic.shape[0]
     xLimit = schematic.shape[1]
     x = 0
     y = 0
     while y < yLimit:
         targets = []
-        while x < xLimit:
-            if str.isdigit(schematic.iloc[y, x]):
+        while x <= xLimit:
+            if x == xLimit:
+                if len(targets) > 0:
+                    test = partScan(targets, schematic)
+                    if test:
+                        partNums.append(buildNum(targets, schematic))
+                    targets = []
+            elif str.isdigit(schematic.iloc[y, x]):
                 targets.append((y, x))
-            elif x == xLimit - 1 and len(targets) > 0:
-                test = partScan(targets, schematic)
-                if test:
-                    partNums.append(buildNum(targets, schematic))
-                targets = []
             else:
                 if len(targets) > 0:
                     test = partScan(targets, schematic)
